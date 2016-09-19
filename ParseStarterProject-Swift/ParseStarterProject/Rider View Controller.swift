@@ -21,9 +21,10 @@ class Rider_View_Controller: UIViewController, CLLocationManagerDelegate, MKMapV
     var riderRequestActive = false
     var driverOnTheWay = false
     
+    
     @IBOutlet var callUberButton: UIButton!
     
-    @IBAction func callUber(sender: AnyObject) {
+    @IBAction func callUber(sender: UIButton) {
         
         if riderRequestActive == false {
             
@@ -35,12 +36,12 @@ class Rider_View_Controller: UIViewController, CLLocationManagerDelegate, MKMapV
                 
                 if success {
                     
-                    self.callUberButton.setTitle("Cancel Uber", forState: .Normal)
+                    self.callUberButton.setTitle("Cancel Taxi", forState: .Normal)
                     self.riderRequestActive = true
-
+                    
                 } else {
                     
-                    self.displayAlert("Could not call Uber", message: "Please try again!")
+                    self.displayAlert("Could not call Taxi", message: "Please try again!")
                 }
             }
             
@@ -57,9 +58,9 @@ class Rider_View_Controller: UIViewController, CLLocationManagerDelegate, MKMapV
                         for object in objects {
                             object.deleteInBackgroundWithBlock({ (success, error) in
                                 if success {
-                                    self.callUberButton.setTitle("Call an Uber", forState: .Normal)
+                                    self.callUberButton.setTitle("Call Taxi", forState: .Normal)
                                     self.riderRequestActive = false
-
+                                    
                                 } else {
                                     self.displayAlert("Error", message: "Not able to cancel your Uber right now. Please try again later!")
                                 }
@@ -71,6 +72,8 @@ class Rider_View_Controller: UIViewController, CLLocationManagerDelegate, MKMapV
             })
             
         }
+        
+
     }
     
     override func viewDidLoad() {
